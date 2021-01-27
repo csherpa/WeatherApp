@@ -1,11 +1,13 @@
 import React from 'react';
+import { Weather } from './Weather';
 
-const App = () => {
+
+export const App = () => {
     return (
-        <div>
-            <h1>Hello!</h1>
+        <div className="App">
+            {/* <h1>weather page!</h1> */}
+            <Weather/>
         </div>
     )
 }
 
-export default App;
