@@ -15,10 +15,9 @@ export class Weather extends React.Component {
                         <Form.Control type="search" placeholder="Enter city" />
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        Search
                     </Button>
                 </Form>
-                <h1>Weather</h1>
             </div>
         )
     }
