@@ -11,36 +11,31 @@ app.get('/', (req, res) => {
     console.log('got the get request');
 });
 
-//get weather by cityname
-app.get('/:cityName', (req, res) => {
-    const cityName = req.params.cityName;
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.API_KEY}`
-    
+
+
+app.get('/api/:latitude/:longitude', (req, res) => {
+    //const url = `http://api.openweathermap.org/data/2.5/weather?q=${req.params.city}&appid=${process.env.API_KEY}`
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${req.params.latitude}&lon=${req.params.longitude}&units=metric&exclude=minutely&appid=${process.env.API_KEY}`
     return fetch(url)
         .then((response) => response.json())
         .then((data) => res.send(data))
         .catch((err) => console.log(err));
-
 });
 
+app.get('/api/geo/:city', (req, res) => {
+    return fetch(`http://gd.geobytes.com/AutoCompleteCity?q=${req.params.city}`)
+        .then(cities => cities.json())
+        .then((cities) => res.json(cities))
+        .catch((error) => console.log('error', error));
+}
+);
 
+app.get('/api/details/:city', (req, res) => {
+    return fetch(`http://gd.geobytes.com/GetCityDetails?fqcn=${req.params.city}`)
+        .then(details => details.json())
+        .then((details) => res.json(details))
+        .catch((error) => console.log('error', error));
+}
+);
 
 app.listen(port);
-
-// app.get('/api/geo/:citySearch', (req, res) => {
-//     const searchUrl = `http://gd.geobytes.com/AutoCompleteCity?q=${req.params.city}`
-//     return fetch(searchUrl)
-//         .then((data) => data.json())
-//         .then((data) => console.log(data))
-//         .catch((err) => console.log(err));      
-// });
-    
-// const weather = {
-        //     city: city,
-        //     temperature: Math.round((cityWeather.main.temp - 273.15) * 9/5 + 32),
-        //     temp_max: Math.round((cityWeather.main.temp_max - 273.15) * 9/5 + 32),
-        //     temp_min: Math.round((cityWeather.main.temp_min - 273.15) * 9/5 + 32),
-        //     humidity: cityWeather.main.humidity,
-        //     description: cityWeather.weather[0].description,
-        //     windspeed: cityWeather.wind.speed
-        // }
