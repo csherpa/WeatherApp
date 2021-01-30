@@ -1,9 +1,12 @@
 const express = require('express');
+const path = require('path');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express();
 const port = 3000;
+
+app.use(express.static(path.join(__dirname, "../myfrontend")));
 
 app.get('/', (req, res) => {
     const date = new Date();
