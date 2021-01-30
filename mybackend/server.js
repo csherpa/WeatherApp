@@ -51,3 +51,5 @@ app.get('/api/details/:city', (req, res) => {
 );
 
 app.listen(port);
+
+
