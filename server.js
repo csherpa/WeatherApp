@@ -4,9 +4,9 @@ const path = require('path');
 const PORT = process.env.PORT || 5000
 
 const app = express();
-// app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
     res.send({working: true})
 })
 app.get('/home', (req,res) =>{
